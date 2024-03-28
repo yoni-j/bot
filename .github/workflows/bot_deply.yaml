@@ -23,14 +23,13 @@ jobs:
         with:
           python-version: '3.10'
           cache: 'pip'
-          
+
       - run: pip install telegram
 
       - name: Build and deploy Cloud Function
         uses: google-github-actions/deploy-cloud-functions@v2
         with:
           name: orders-bot
-          runtime: python311
+          runtime: python310
           entry_point: main.handle_update
-          trigger_http: true
           env_vars: BOT_TOKEN=${{ secrets.BOT_TOKEN }}
