@@ -39,3 +39,4 @@ jobs:
             --allow-unauthenticated \
             --region us-east1 \
             --project yonidev
+            --set-env-vars BOT_TOKEN=${{ secrets.BOT_TOKEN }}
