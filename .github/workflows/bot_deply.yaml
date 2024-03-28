@@ -1,0 +1,38 @@
+name: Deploy Cloud Function
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v2'
+        with:
+          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v2'
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1.2.0
+        with:
+          version: '1.5.1'
+
+      - name: Install Python dependencies
+        run: |
+          poetry install
+
+      - name: Build and deploy Cloud Function
+        uses: google-github-actions/deploy-cloud-functions@v0.3.1
+        with:
+          name: orders-bot
+          runtime: python311
+          entry_point: main.handle_update
+          trigger_http: true
+          env_vars: BOT_TOKEN=${{ secrets.BOT_TOKEN }}
