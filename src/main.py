@@ -12,6 +12,7 @@ BOT_TOKEN = os.getenv("BOT_TOKEN")
 @functions_framework.http
 def handle_update(request):
     update = telegram.Update.de_json(request.get_json(), bot=telegram.Bot(token=BOT_TOKEN))
+    logger.info("started!!!!!!!")
 
     # Extract the user message
     message = update.message.text
