@@ -1,4 +1,4 @@
-name: Deploy Cloud Function
+name: Deploy Orders Bot
 
 on:
   push:
@@ -26,12 +26,14 @@ jobs:
 
       - run: |
           pip install telegram
+          cd src
           pip freeze > requirements.txt
 
       - name: Deploy Cloud Function
         run: |
           gcloud functions deploy orders-bot \
             --runtime python310 \
+            --source src \
             --trigger-http \
             --entry-point handle_update \
             --allow-unauthenticated \

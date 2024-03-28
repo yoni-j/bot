@@ -1,7 +1,9 @@
+import os
+
 import telegram
 import functions_framework
 
-BOT_TOKEN = "YOUR_BOT_TOKEN"
+BOT_TOKEN = os.getenv("BOT_TOKEN")
 
 
 @functions_framework.http
