@@ -38,5 +38,5 @@ jobs:
             --entry-point handle_update \
             --allow-unauthenticated \
             --region us-east1 \
-            --project yonidev
+            --project yonidev \
             --set-env-vars BOT_TOKEN=${{ secrets.BOT_TOKEN }}
