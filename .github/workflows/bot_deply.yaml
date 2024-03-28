@@ -31,7 +31,7 @@ jobs:
           gcloud functions deploy orders-bot \
             --runtime python310 \
             --trigger-http \
-            --entry-point main.handle_update \
+            --entry-point handle_update \
             --allow-unauthenticated \
             --region us-east1 \
             --project yonidev
