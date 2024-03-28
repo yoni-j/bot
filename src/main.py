@@ -2,6 +2,9 @@ import os
 
 import telegram
 import functions_framework
+import logging
+
+logger = logging.getLogger()
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 
@@ -12,10 +15,12 @@ def handle_update(request):
 
     # Extract the user message
     message = update.message.text
+    logger.info(message)
 
     # Handle the message (basic echo example)
     if message:
         reply_text = f"You said: {message}"
+        logger.info(reply_text)
         bot = telegram.Bot(token=BOT_TOKEN)
         bot.send_message(chat_id=update.message.chat_id, text=reply_text)
 
