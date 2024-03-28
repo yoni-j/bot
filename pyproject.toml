@@ -9,6 +9,7 @@ readme = "README.md"
 python = "^3.11"
 telegram = "^0.0.1"
 functions-framework = "^3.5.0"
+python-telegram-bot = "^21.0.1"
 
 
 [build-system]

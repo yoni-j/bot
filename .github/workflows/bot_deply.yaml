@@ -25,7 +25,7 @@ jobs:
           cache: 'pip'
 
       - run: |
-          pip install telegram
+          pip install python-telegram-bot
           cd src
           pip freeze > requirements.txt
 
