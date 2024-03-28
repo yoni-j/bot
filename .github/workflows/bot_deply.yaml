@@ -26,10 +26,12 @@ jobs:
 
       - run: pip install telegram
 
-      - name: Build and deploy Cloud Function
-        uses: google-github-actions/deploy-cloud-functions@v2
-        with:
-          name: orders-bot
-          runtime: python310
-          entry_point: main.handle_update
-          env_vars: BOT_TOKEN=${{ secrets.BOT_TOKEN }}
+      - name: Deploy Cloud Function
+        run: |
+          gcloud functions deploy orders-bot \
+            --runtime python310 \
+            --trigger-http \
+            --entry-point main.handle_update \
+            --allow-unauthenticated \
+            --region us-east1 \
+            --project yonidev

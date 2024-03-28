@@ -1,8 +1,10 @@
 import telegram
+import functions_framework
 
 BOT_TOKEN = "YOUR_BOT_TOKEN"
 
 
+@functions_framework.http
 def handle_update(request):
     update = telegram.Update.de_json(request.get_json(), bot=telegram.Bot(token=BOT_TOKEN))
 
