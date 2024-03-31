@@ -26,12 +26,7 @@ def handle_update(request):
         bot = telegram.Bot(token=BOT_TOKEN)
         publisher = pubsub_v1.PublisherClient()
         topic_path = publisher.topic_path(project_id, topic_name)
-        message_json = json.dumps(
-            {
-                "data": {"message": reply_text},
-            }
-        )
-        message_bytes = message_json.encode("utf-8")
+        message_bytes = reply_text.encode("utf-8")
         try:
             publish_future = publisher.publish(topic_path, data=message_bytes)
             publish_future.result()
