@@ -6,7 +6,7 @@ authors = ["Yoni Jacobi <yony@slatescience.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.10"
 telegram = "^0.0.1"
 functions-framework = "^3.5.0"
 python-telegram-bot = "^21.0.1"
