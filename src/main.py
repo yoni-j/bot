@@ -24,19 +24,19 @@ def handle_update(request):
     if message:
         reply_text = f"You said: {message}"
         bot = telegram.Bot(token=BOT_TOKEN)
-        # publisher = pubsub_v1.PublisherClient()
-        # topic_path = publisher.topic_path(project_id, topic_name)
-        # message_json = json.dumps(
-        #     {
-        #         "data": {"message": reply_text},
-        #     }
-        # )
-        # message_bytes = message_json.encode("utf-8")
-        # try:
-        #     publish_future = publisher.publish(topic_path, data=message_bytes)
-        #     publish_future.result()
-        # except Exception as e:
-        #     print(f"Error publishing message: {e}")
+        publisher = pubsub_v1.PublisherClient()
+        topic_path = publisher.topic_path(project_id, topic_name)
+        message_json = json.dumps(
+            {
+                "data": {"message": reply_text},
+            }
+        )
+        message_bytes = message_json.encode("utf-8")
+        try:
+            publish_future = publisher.publish(topic_path, data=message_bytes)
+            publish_future.result()
+        except Exception as e:
+            print(f"Error publishing message: {e}")
         asyncio.run(bot.send_message(chat_id=update.message.chat_id, text=reply_text))
 
     return "OK"
