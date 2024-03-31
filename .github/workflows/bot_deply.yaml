@@ -30,7 +30,7 @@ jobs:
       - name: Deploy Cloud Function
         run: |
           gcloud functions deploy orders-bot \
-            --timeout=360s
+            --timeout=360s \
             --runtime python310 \
             --source src \
             --trigger-http \
