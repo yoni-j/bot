@@ -19,16 +19,19 @@ topic_name = "llm-topic"
 
 @functions_framework.http
 def handle_update(request):
-    update = telegram.Update.de_json(request.get_json(), bot=telegram.Bot(token=BOT_TOKEN))
+    bot = telegram.Bot(token=BOT_TOKEN)
+    print(request.get_json())
+    update = telegram.Update.de_json(request.get_json(), bot=bot)
     message = update.message.text
 
     if message:
+        # Handle message from llm service
         if LLM_MESSAGE_PREFIX in message:
             message = message.replace(LLM_MESSAGE_PREFIX, '')
-            bot = telegram.Bot(token=BOT_TOKEN)
             asyncio.run(bot.send_message(chat_id=update.message.chat_id, text=message))
             return "OK"
 
+        # Handle user message
         else:
             publisher = pubsub_v1.PublisherClient()
             topic_path = publisher.topic_path(project_id, topic_name)
